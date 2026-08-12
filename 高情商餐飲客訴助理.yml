@@ -1,0 +1,218 @@
+app:
+  description: ''
+  icon: 🤖
+  icon_background: '#FFEAD5'
+  icon_type: emoji
+  mode: advanced-chat
+  name: 高情商餐飲客訴助理
+  use_icon_as_answer_icon: false
+dependencies:
+- current_identifier: null
+  type: marketplace
+  value:
+    marketplace_plugin_unique_identifier: langgenius/openai:1.0.3@cc37544750d72ca3782bdaa81ab0e2facbf5bb74105a169a7ff974a27c6a5f29
+    version: null
+kind: app
+version: 0.7.0
+workflow:
+  conversation_variables: []
+  environment_variables: []
+  features:
+    file_upload:
+      allowed_file_extensions:
+      - .JPG
+      - .JPEG
+      - .PNG
+      - .GIF
+      - .WEBP
+      - .SVG
+      allowed_file_types:
+      - image
+      allowed_file_upload_methods:
+      - local_file
+      - remote_url
+      enabled: false
+      fileUploadConfig:
+        attachment_image_file_size_limit: 2
+        audio_file_size_limit: 50
+        batch_count_limit: 5
+        file_size_limit: 15
+        file_upload_limit: 50
+        image_file_batch_limit: 10
+        image_file_size_limit: 10
+        knowledge_file_size_limit: 15
+        single_chunk_attachment_limit: 10
+        video_file_size_limit: 100
+        workflow_file_upload_limit: 10
+      image:
+        enabled: false
+        number_limits: 3
+        transfer_methods:
+        - local_file
+        - remote_url
+      number_limits: 3
+    opening_statement: ''
+    retriever_resource:
+      enabled: true
+    sensitive_word_avoidance:
+      enabled: false
+    speech_to_text:
+      enabled: false
+    suggested_questions: []
+    suggested_questions_after_answer:
+      enabled: false
+    text_to_speech:
+      enabled: false
+      language: ''
+      voice: ''
+  graph:
+    edges:
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: start
+        targetType: llm
+      id: 1786505024801-llm
+      source: '1786505024801'
+      sourceHandle: source
+      target: llm
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    - data:
+        isInIteration: false
+        isInLoop: false
+        sourceType: llm
+        targetType: answer
+      id: llm-answer
+      source: llm
+      sourceHandle: source
+      target: answer
+      targetHandle: target
+      type: custom
+      zIndex: 0
+    nodes:
+    - data:
+        selected: false
+        title: 開始
+        type: start
+        variables: []
+      height: 73
+      id: '1786505024801'
+      position:
+        x: 80
+        y: 282
+      positionAbsolute:
+        x: 80
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        context:
+          enabled: false
+          variable_selector: []
+        memory:
+          query_prompt_template: '{{#sys.query#}}
+
+
+            {{#sys.files#}}'
+          role_prefix:
+            assistant: ''
+            user: ''
+          window:
+            enabled: false
+            size: 10
+        model:
+          completion_params:
+            temperature: 0.7
+          mode: chat
+          name: gpt-5
+          provider: langgenius/openai/openai
+        prompt_template:
+        - id: 7d0f0276-e63f-4a77-b8a9-3056a6bf8c71
+          role: system
+          text: '你是知名餐酒館「微醺之夜 Bistro」的 AI 侍酒與訂位經理。
+
+            請遵守以下規則回答：
+
+            1. 語氣必須優雅、專業、熱情，適時帶有放鬆的微醺氛圍。
+
+            2. 只要客人提到特定的餐點或酒類需求，你必須「嚴格根據以下菜單」進行推薦，絕對不能自己編造沒賣的酒或菜。
+
+            3. 預設基本資訊：營業時間為「每週二至週日 18:00 - 02:00（週一公休）」。
+
+
+            【微醺之夜 Bistro 官方菜單】
+
+            ★ 特色主食
+
+            - 松露野菇燉飯：NT$380（濃郁松露香氣，奶香十足）
+
+            - 乾煎干貝明太子義大利麵：NT$420（微辣，新鮮干貝）
+
+            - 爐烤安格斯肋眼牛排 (10oz)：NT$980（主廚推薦五分熟）
+
+
+            ★ 特色調酒（未滿18歲請勿飲酒）
+
+            - 暮色微醺：NT$350（琴酒基底，帶有薰衣草與檸檬清香，適合女生）
+
+            - 煙燻烏托邦：NT$380（威士忌基底，帶有肉桂與泥煤煙燻風味，酒感較重）
+
+
+            【店內重要規則】
+
+            - 每人最低消費：NT$500，並需加收 10% 服務費。
+
+            - 禁帶外食，自備酒水需酌收開瓶費：葡萄酒 $500/瓶、烈酒 $1000/瓶。
+
+
+            請謹慎使用程式碼。'
+        selected: false
+        title: LLM
+        type: llm
+        vision:
+          enabled: false
+      height: 88
+      id: llm
+      position:
+        x: 380
+        y: 282
+      positionAbsolute:
+        x: 380
+        y: 282
+      selected: true
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    - data:
+        answer: '{{#llm.text#}}'
+        selected: false
+        title: 直接回覆
+        type: answer
+        variables: []
+      height: 102
+      id: answer
+      position:
+        x: 680
+        y: 282
+      positionAbsolute:
+        x: 680
+        y: 282
+      selected: false
+      sourcePosition: right
+      targetPosition: left
+      type: custom
+      width: 242
+      zIndex: 0
+    viewport:
+      x: -165
+      y: 126.5
+      zoom: 1
+  rag_pipeline_variables: []
